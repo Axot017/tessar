@@ -1,0 +1,40 @@
+name: 'Build and deploy - dev'
+
+on:
+  push:
+    branches: 
+      - master
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      cache_id: hello-lambda
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            ./target
+          key: ${{ env.cache_id }}-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUSTC_HASH }}
+
+      - name: Add target
+        run: rustup target add aarch64-unknown-linux-gnu
+        shell: bash
+
+      - name: Build target
+        uses: actions-rs/cargo@v1
+        with:
+          use-cross: true
+          command: build
+          args: --release --target aarch64-unknown-linux-gnu
