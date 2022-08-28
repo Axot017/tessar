@@ -16,6 +16,8 @@ pub fn build_lambda(args: &BuildLambdaArgs) -> Result<(), DynError> {
     let release_path = target_path.join(&args.target).join("release");
     let lambdas_dir = target_path.join("lambdas");
 
+    std::fs::remove_dir_all(&lambdas_dir).ok();
+
     std::fs::create_dir(&lambdas_dir)?;
 
     for lambda in lambdas_names {
