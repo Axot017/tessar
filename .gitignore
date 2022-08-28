@@ -9,3 +9,6 @@ cdk.out
 
 # cargo
 target
+
+# MacOS
+**/.DS_Store
