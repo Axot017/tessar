@@ -3,6 +3,7 @@ use std::fmt::Display;
 #[derive(Debug)]
 pub enum Error {
     BuildFailed,
+    FailedToInstallCross,
 }
 
 impl Display for Error {

@@ -19,4 +19,6 @@ pub struct BuildLambdaArgs {
     pub target: String,
     #[clap(short, long, default_value_t = String::from("bootstrap"))]
     pub entrypoint: String,
+    #[clap(short, long)]
+    pub use_cross: bool,
 }
