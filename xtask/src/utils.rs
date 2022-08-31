@@ -35,9 +35,9 @@ pub fn install_cross() -> Result<(), DynError> {
 
 pub fn run_cargo_build(target: &str, use_cross: bool) -> Result<(), DynError> {
     let cargo = if use_cross {
-        env::var("CARGO").unwrap_or_else(|_| "cargo".to_owned())
-    } else {
         "cross".to_owned()
+    } else {
+        env::var("CARGO").unwrap_or_else(|_| "cargo".to_owned())
     };
     let status = process::Command::new(cargo)
         .current_dir(project_root())
