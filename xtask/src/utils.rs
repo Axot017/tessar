@@ -19,8 +19,26 @@ pub fn project_root() -> PathBuf {
         .to_path_buf()
 }
 
-pub fn run_cargo_build(target: &str) -> Result<(), DynError> {
+pub fn install_cross() -> Result<(), DynError> {
     let cargo = env::var("CARGO").unwrap_or_else(|_| "cargo".to_string());
+    let status = process::Command::new(cargo)
+        .current_dir(project_root())
+        .args(&["install", "cross"])
+        .status()?;
+
+    if status.success() {
+        Ok(())
+    } else {
+        Err(Error::FailedToInstallCross)?
+    }
+}
+
+pub fn run_cargo_build(target: &str, use_cross: bool) -> Result<(), DynError> {
+    let cargo = if use_cross {
+        "cross".to_owned()
+    } else {
+        env::var("CARGO").unwrap_or_else(|_| "cargo".to_owned())
+    };
     let status = process::Command::new(cargo)
         .current_dir(project_root())
         .args(&["build", "--release", "--target", target])
