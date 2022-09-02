@@ -3,7 +3,6 @@ use std::io::Write;
 use std::io::Read;
 use zip::write::FileOptions;
 
-use crate::utils::install_cross;
 use crate::{
     command::BuildLambdaArgs,
     error::DynError,
@@ -11,9 +10,6 @@ use crate::{
 };
 
 pub fn build_lambda(args: &BuildLambdaArgs) -> Result<(), DynError> {
-    if args.use_cross {
-        install_cross()?;
-    }
     run_cargo_build(&args.target, args.use_cross)?;
     let lambdas_names = get_project_names(project_root().join("backend").join("lambda"));
     let target_path = project_root().join("target");
