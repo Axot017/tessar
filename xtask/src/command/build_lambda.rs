@@ -10,23 +10,17 @@ use crate::util::project::get_project_names;
 use crate::util::project::project_root;
 
 pub fn build_lambda(args: &BuildLambdaArgs) -> Result<(), DynError> {
-    println!("Test 1");
     run_cargo_build(&args.target, args.use_cross)?;
-    println!("Test 2");
     let lambdas_names = get_project_names(project_root().join("backend").join("lambda"));
-    println!("Test 3");
     let target_path = project_root().join("target");
     let release_path = target_path.join(&args.target).join("release");
     let lambdas_dir = target_path.join("lambdas");
 
     std::fs::remove_dir_all(&lambdas_dir).ok();
-    println!("Test 4");
 
     std::fs::create_dir(&lambdas_dir)?;
-    println!("Test 5");
 
     for lambda in lambdas_names {
-        println!("Test 6");
         let lambda_executable_path = release_path.join(&lambda);
         let mut lambda_executable = std::fs::File::open(&lambda_executable_path)?;
         let zip_name = format!("{}.zip", lambda);
@@ -39,13 +33,8 @@ pub fn build_lambda(args: &BuildLambdaArgs) -> Result<(), DynError> {
         let mut buffer = vec![0; metadata.len() as usize];
         lambda_executable.read_exact(&mut buffer)?;
         zip.write_all(&buffer)?;
-
         zip.finish()?;
-
-        println!("Test 7");
     }
-
-    println!("Test 8");
 
     Ok(())
 }
