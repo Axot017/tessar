@@ -1,6 +1,7 @@
 use clap::{Args, Parser, Subcommand};
 
 pub mod build_lambda;
+pub mod create_flutter_layer;
 
 #[derive(Parser)]
 #[clap(author, version, about, long_about = None)]
@@ -13,6 +14,7 @@ pub struct Cli {
 #[derive(Subcommand)]
 pub enum Command {
     BuildLambda(BuildLambdaArgs),
+    CreateFlutterLayer(CreateFlutterLayerArgs),
 }
 
 #[derive(Args, Debug)]
@@ -23,4 +25,10 @@ pub struct BuildLambdaArgs {
     pub entrypoint: String,
     #[clap(short, long)]
     pub use_cross: bool,
+}
+
+#[derive(Args, Debug)]
+pub struct CreateFlutterLayerArgs {
+    #[clap(short, long, default_value_t = String::from("aarch64-unknown-linux-gnu"))]
+    pub target: String,
 }

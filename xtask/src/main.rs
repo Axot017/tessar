@@ -1,5 +1,7 @@
 use clap::Parser;
-use command::{build_lambda::build_lambda, Cli, Command};
+use command::{
+    build_lambda::build_lambda, create_flutter_layer::create_flutter_layer, Cli, Command,
+};
 use model::error::DynError;
 
 mod command;
@@ -18,5 +20,6 @@ fn try_main() -> Result<(), DynError> {
 
     match &cli.command {
         Command::BuildLambda(args) => build_lambda(args),
+        Command::CreateFlutterLayer(args) => create_flutter_layer(args),
     }
 }
