@@ -1,13 +1,10 @@
-use build_lambda::build_lambda;
 use clap::Parser;
-use command::{Cli, Command};
-use error::DynError;
+use command::{build_lambda::build_lambda, Cli, Command};
+use model::error::DynError;
 
-mod build_lambda;
-mod cargo_content;
 mod command;
-mod error;
-mod utils;
+mod model;
+mod util;
 
 fn main() {
     if let Err(e) = try_main() {

@@ -3,11 +3,11 @@ use std::io::Write;
 use std::io::Read;
 use zip::write::FileOptions;
 
-use crate::{
-    command::BuildLambdaArgs,
-    error::DynError,
-    utils::{get_project_names, project_root, run_cargo_build},
-};
+use crate::command::BuildLambdaArgs;
+use crate::model::error::DynError;
+use crate::util::cargo::run_cargo_build;
+use crate::util::project::get_project_names;
+use crate::util::project::project_root;
 
 pub fn build_lambda(args: &BuildLambdaArgs) -> Result<(), DynError> {
     run_cargo_build(&args.target, args.use_cross)?;
