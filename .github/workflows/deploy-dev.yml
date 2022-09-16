@@ -32,6 +32,12 @@ jobs:
         run: rustup target add aarch64-unknown-linux-gnu
         shell: bash
 
+      - name: Install cross
+        uses: actions-rs/cargo@v1
+        with:
+          command: install
+          args: cross
+
       - name: Build target
         uses: actions-rs/cargo@v1
         with:
