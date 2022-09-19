@@ -37,7 +37,7 @@ pub fn precache_flutter(flutter_path: &PathBuf) -> Result<(), DynError> {
             "linux/arm64",
             "-w",
             "/usr/flutter",
-            "arm64v8/rust:latest",
+            "alpine/git:latest",
             "./bin/flutter",
             "precache",
         ])
