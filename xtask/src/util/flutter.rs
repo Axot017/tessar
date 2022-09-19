@@ -37,7 +37,7 @@ pub fn precache_flutter(flutter_path: &PathBuf, platform: &str) -> Result<(), Dy
             .as_str(),
             "-w",
             "/usr/flutter",
-            "rust:latest",
+            "ubuntu:latest",
             "./bin/flutter",
             "precache",
         ])
