@@ -21,13 +21,11 @@ pub fn fetch_flutter(path: &PathBuf) -> Result<(), DynError> {
     }
 }
 
-pub fn precache_flutter(flutter_path: &PathBuf, _platform: &str) -> Result<(), DynError> {
+pub fn precache_flutter(flutter_path: &PathBuf) -> Result<(), DynError> {
     let status = std::process::Command::new("docker")
         .current_dir(flutter_path)
         .args(vec![
             "run",
-            // "--platform",
-            // platform,
             "--rm",
             "-v",
             format!(
@@ -37,7 +35,7 @@ pub fn precache_flutter(flutter_path: &PathBuf, _platform: &str) -> Result<(), D
             .as_str(),
             "-w",
             "/usr/flutter",
-            "rust:latest",
+            "arm64v8/rust:latest",
             "./bin/flutter",
             "precache",
         ])
