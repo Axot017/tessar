@@ -25,7 +25,11 @@ pub fn make_dir_owned(dir: &PathBuf) -> Result<(), DynError> {
     println!("group: {group:?}");
     std::process::Command::new("chown")
         .current_dir(&dir)
-        .args(vec!["-R", &format!("{}:{}", user, group), "."])
+        .args(vec![
+            "-R",
+            &format!("{}:{}", user.trim(), group.trim()),
+            ".",
+        ])
         .status()?;
 
     Ok(())
