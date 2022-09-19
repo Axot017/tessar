@@ -28,7 +28,4 @@ pub struct BuildLambdaArgs {
 }
 
 #[derive(Args, Debug)]
-pub struct CreateFlutterLayerArgs {
-    #[clap(short, long, default_value_t = String::from("linux/arm64"))]
-    pub platform: String,
-}
+pub struct CreateFlutterLayerArgs {}
