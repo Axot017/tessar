@@ -21,10 +21,8 @@ pub fn zip_dir(dir: &PathBuf, output_file: &PathBuf) -> Result<(), DynError> {
         let name = path.strip_prefix(std::path::Path::new(dir))?;
 
         if path.is_file() {
-            let mut perms = std::fs::metadata(&path)?.permissions();
-            perms.set_readonly(false);
-            std::fs::set_permissions(&path, perms)?;
-            let mut file_in = std::fs::File::open(&path)?;
+            let mut file_in =
+                std::fs::File::open(&path).expect(&format!("Failed to open {path:?}"));
             zip.start_file(name.to_str().unwrap(), FileOptions::default())?;
 
             file_in.read_exact(&mut buffer)?;
