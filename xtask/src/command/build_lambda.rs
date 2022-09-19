@@ -18,7 +18,7 @@ pub fn build_lambda(args: &BuildLambdaArgs) -> Result<(), DynError> {
 
     std::fs::remove_dir_all(&lambdas_dir).ok();
 
-    std::fs::create_dir(&lambdas_dir)?;
+    std::fs::create_dir_all(&lambdas_dir)?;
 
     for lambda in lambdas_names {
         let lambda_executable_path = release_path.join(&lambda);
