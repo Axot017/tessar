@@ -13,7 +13,7 @@ pub fn create_flutter_layer(args: &CreateFlutterLayerArgs) -> Result<(), DynErro
     let flutter_path = tmp_path.join("flutter");
     let flutter_bin_path = flutter_path.join("bin");
     let layer_path = project_root().join("target").join("layer");
-    std::fs::remove_dir_all(&tmp_path)?;
+    std::fs::remove_dir_all(&tmp_path).ok();
     fetch_flutter(&tmp_path)?;
     precache_flutter(&flutter_path, &args.platform)?;
 
