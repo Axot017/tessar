@@ -30,7 +30,9 @@ jobs:
 
       - name: Add target
         run: rustup target add aarch64-unknown-linux-gnu
-        shell: bash
+
+      - name: Install cross
+        run: cargo install cross
 
       - name: Build target
         uses: actions-rs/cargo@v1
