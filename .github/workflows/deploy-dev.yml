@@ -21,8 +21,11 @@ jobs:
       - uses: actions/cache@v2
         with:
           path: |
-            ~/.cargo/
-            ./target/
+            ~/.cargo/bin/
+            ~/.cargo/registry/index/
+            ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            ./target
           key: ${{ env.cache_id }}-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUSTC_HASH }}
 
       - name: Add target
