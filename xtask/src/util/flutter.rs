@@ -33,8 +33,6 @@ pub fn precache_flutter(flutter_path: &PathBuf) -> Result<(), DynError> {
                 flutter_path.to_str().expect("flutter_path is empty")
             )
             .as_str(),
-            "--platform",
-            "linux/arm64",
             "-w",
             "/usr/flutter",
             "arm64v8/rust:latest",
