@@ -8,10 +8,7 @@ use zip::write::FileOptions;
 
 use crate::model::error::DynError;
 
-use super::system::make_dir_owned;
-
 pub fn zip_dir(dir: &PathBuf, output_file: &PathBuf) -> Result<(), DynError> {
-    make_dir_owned(dir)?;
     let file = std::fs::File::create(&output_file)?;
 
     let walkdir = WalkDir::new(dir);

@@ -28,4 +28,11 @@ pub struct BuildLambdaArgs {
 }
 
 #[derive(Args, Debug)]
-pub struct CreateFlutterLayerArgs {}
+pub struct CreateFlutterLayerArgs {
+    #[clap(short, long, default_value_t = String::from("arm64v8/rust:latest"))]
+    pub image: String,
+    #[clap(short, long, default_value_t = String::from("linux/arm64"))]
+    pub platform: String,
+    #[clap(short, long)]
+    pub use_sudo: bool,
+}
