@@ -28,6 +28,9 @@ jobs:
             ./target
           key: ${{ env.cache_id }}-${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}-${{ env.RUSTC_HASH }}
 
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+
       - name: Add target
         run: rustup target add aarch64-unknown-linux-gnu
 
