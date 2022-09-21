@@ -44,6 +44,14 @@ pub fn precache_flutter(
             image,
             "./bin/flutter",
             "precache",
+            "--no-android",
+            "--no-ios",
+            "--no-linux",
+            "--no-macos",
+            "--no-windows",
+            "--no-universal",
+            "--no-fuchsia",
+            "--web",
         ])
         .status()?;
 
