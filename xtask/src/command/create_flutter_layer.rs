@@ -23,5 +23,9 @@ pub fn create_flutter_layer(args: &CreateFlutterLayerArgs) -> Result<(), DynErro
     if args.use_sudo {
         make_dir_owned(&flutter_bin_path)?;
     }
-    zip_dir(&flutter_bin_path, &layer_path.join("flutter_layer.zip"))
+    zip_dir(
+        &flutter_bin_path,
+        &layer_path.join("flutter_layer.zip"),
+        Some(&std::path::Path::new("bin").to_path_buf()),
+    )
 }

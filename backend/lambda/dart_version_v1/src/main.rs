@@ -1,10 +1,17 @@
 use lambda_http::{run, service_fn, Body, Error, Request, Response};
 
 async fn function_handler(_event: Request) -> Result<Response<Body>, Error> {
+    let result = std::process::Command::new("dart")
+        .arg("--version")
+        .output()
+        .unwrap();
+
+    let result2 = String::from_utf8(result.stdout).unwrap_or_else(|e| e.to_string());
+
     let resp = Response::builder()
         .status(200)
         .header("content-type", "text/html")
-        .body("Hello World".into())
+        .body(result2.into())
         .map_err(Box::new)?;
     Ok(resp)
 }

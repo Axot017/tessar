@@ -8,7 +8,11 @@ use zip::write::FileOptions;
 
 use crate::model::error::DynError;
 
-pub fn zip_dir(dir: &PathBuf, output_file: &PathBuf) -> Result<(), DynError> {
+pub fn zip_dir(
+    dir: &PathBuf,
+    output_file: &PathBuf,
+    path_prefix: Option<&PathBuf>,
+) -> Result<(), DynError> {
     let file = std::fs::File::create(&output_file)?;
 
     let walkdir = WalkDir::new(dir);
@@ -18,16 +22,23 @@ pub fn zip_dir(dir: &PathBuf, output_file: &PathBuf) -> Result<(), DynError> {
 
     for entry in it {
         let path = entry.path();
-        let name = path.strip_prefix(std::path::Path::new(dir))?;
+        let mut name = path.strip_prefix(std::path::Path::new(dir))?.to_owned();
+
+        if let Some(p) = path_prefix {
+            name = p.join(name);
+        }
 
         if path.is_file() {
             let mut file_in = std::fs::File::open(&path)?;
             zip.start_file(name.to_str().unwrap(), FileOptions::default())?;
 
-            file_in.read_exact(&mut buffer)?;
-            zip.write_all(&buffer)?;
+            file_in.read_to_end(&mut buffer)?;
+            zip.write_all(&*buffer)?;
+
             buffer.clear();
         }
     }
+
+    zip.finish()?;
     Ok(())
 }
