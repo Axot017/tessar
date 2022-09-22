@@ -44,7 +44,7 @@ jobs:
           command: xtask
           args: build-lambda --use-cross --target aarch64-unknown-linux-gnu
 
-      - name: Create flutter layer
+      - name: Create dart layer
         uses: actions-rs/cargo@v1
         with:
           command: xtask
