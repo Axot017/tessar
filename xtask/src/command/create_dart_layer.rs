@@ -42,7 +42,7 @@ pub fn create_dart_layer(args: &CreateDartLayerArgs) -> Result<(), DynError> {
     std::fs::remove_file(&dart_layer_dir).ok();
 
     let path_in_zip = std::path::Path::new("bin").to_path_buf().join("dart");
-    zip_file(&dart_bin_dir, &layer_dir, &path_in_zip)?;
+    zip_file(&dart_bin_dir, &dart_layer_dir, &path_in_zip)?;
 
     Ok(())
 }
