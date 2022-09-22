@@ -16,6 +16,9 @@ pub fn create_dart_layer(args: &CreateDartLayerArgs) -> Result<(), DynError> {
     let tmp_dir = project_root().join("tmp");
     std::fs::create_dir_all(&tmp_dir).ok();
 
+    let dart_sdk_dir = tmp_dir.join("dart-sdk");
+    std::fs::remove_dir_all(&dart_sdk_dir).ok();
+
     let zip_dir = tmp_dir.join("dart.zip");
     std::fs::remove_file(&zip_dir).ok();
 
@@ -31,7 +34,7 @@ pub fn create_dart_layer(args: &CreateDartLayerArgs) -> Result<(), DynError> {
         .arg(zip_dir)
         .status()?;
 
-    let dart_bin_dir = tmp_dir.join("dart-sdk").join("bin").join("dart");
+    let dart_bin_dir = dart_sdk_dir.join("bin").join("dart");
     let layer_dir = project_root().join("target").join("layer").join("dart.zip");
     std::fs::remove_file(&layer_dir).ok();
 
