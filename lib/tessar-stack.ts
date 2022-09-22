@@ -8,8 +8,8 @@ export class TessarStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const flutterLayer = new LayerVersion(this, 'FlutterLayer', {
-      code: Code.fromAsset('target/layer/flutter_layer.zip'),
+    const dartLayer = new LayerVersion(this, 'DartLayer', {
+      code: Code.fromAsset('target/layer/dart.zip'),
       compatibleRuntimes: [Runtime.PROVIDED_AL2],
     })
 
@@ -25,7 +25,7 @@ export class TessarStack extends cdk.Stack {
         RUST_BACKTRACE: '1',
       },
       logRetention: RetentionDays.ONE_WEEK,
-      layers: [flutterLayer],
+      layers: [dartLayer],
     });
 
     const api = new RestApi(this, "TessarRestApi", {
