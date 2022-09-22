@@ -51,4 +51,13 @@ jobs:
         uses: actions-rs/cargo@v1
         with:
           command: xtask
-          args: create-flutter-layer --use-sudo
+          args: create-dart-layer --version 2.18.1
+
+      - name: Install dependencies
+        run: yarn
+
+      - name: Synth stack
+        run: yarn cdk synth
+
+      - name: Deploy stack
+        run: yarn cdk deploy --all --require-approval never
