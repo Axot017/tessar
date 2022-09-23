@@ -4,11 +4,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-clap = { version = "3.2.17", features = ["derive"] }
+clap = { workspace = true, features = ["derive"] }
 nanoid = { workspace = true }
-openssl = { version = "0.10", features = ["vendored"] }
-reqwest = { version = "0.11.12", features = ["blocking"] }
-serde = { version = "1.0.144", features = ["derive"] }
-toml = "0.5.9"
-walkdir = "2.3.2"
-zip = { version = "0.6.2", default-features = false }
+openssl = { workspace = true, features = ["vendored"] }
+reqwest = { workspace = true, features = ["blocking"] }
+serde = { workspace = true, features = ["derive"] }
+toml = { workspace = true }
+walkdir = { workspace = true }
+zip = { workspace = true }

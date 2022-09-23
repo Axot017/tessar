@@ -2,4 +2,16 @@
 members = ["backend/use_case", "backend/api/lambda/*", "xtask"]
 
 [workspace.dependencies]
-nanoid = "0.4"
+clap = { version = "3.2.17" }
+lambda_http = { version = "0.6", default-features = false }
+lambda_runtime = { version = "0.6" }
+nanoid = { version = "0.4" }
+openssl = { version = "0.10", features = ["vendored"] }
+reqwest = { version = "0.11.12" }
+serde = { version = "1.0.144" }
+tokio = { version = "1" }
+toml = { version = "0.5.9" }
+tracing = { version = "0.1" }
+tracing-subscriber = { version = "0.3", default-features = false }
+walkdir = { version = "2.3.2" }
+zip = { version = "0.6.2", default-features = false }
