@@ -2,7 +2,7 @@ use std::io::Cursor;
 
 use crate::{
     model::error::DynError,
-    util::{project::project_root, zip::zip_file},
+    util::{project::project_root, tmp_dir::TmpDir, zip::zip_file},
 };
 
 use super::CreateDartLayerArgs;
@@ -13,7 +13,8 @@ pub fn create_dart_layer(args: &CreateDartLayerArgs) -> Result<(), DynError> {
         args.version,
     );
 
-    let tmp_dir = project_root().join("tmp");
+    let tmp = TmpDir::new()?;
+    let tmp_dir = tmp.path();
     std::fs::create_dir_all(&tmp_dir).ok();
 
     let dart_sdk_dir = tmp_dir.join("dart-sdk");
