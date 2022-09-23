@@ -12,7 +12,7 @@ pub fn run_cargo_build(target: &str, use_cross: bool) -> Result<(), DynError> {
     };
     let status = process::Command::new(cargo)
         .current_dir(project_root())
-        .args(&["build", "--release", "--target", target])
+        .args(["build", "--release", "--target", target])
         .status()?;
 
     if status.success() {

@@ -1,2 +1,2 @@
 [workspace]
-members = ["backend/use_case", "backend/lambda/*", "xtask"]
+members = ["backend/use_case", "backend/api/lambda/*", "xtask"]
