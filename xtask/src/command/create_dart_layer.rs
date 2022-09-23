@@ -15,7 +15,7 @@ pub fn create_dart_layer(args: &CreateDartLayerArgs) -> Result<(), DynError> {
 
     let tmp = TmpDir::new()?;
     let tmp_dir = tmp.path();
-    std::fs::create_dir_all(&tmp_dir).ok();
+    std::fs::create_dir_all(tmp_dir).ok();
 
     let dart_sdk_dir = tmp_dir.join("dart-sdk");
     std::fs::remove_dir_all(&dart_sdk_dir).ok();
@@ -31,7 +31,7 @@ pub fn create_dart_layer(args: &CreateDartLayerArgs) -> Result<(), DynError> {
     }
 
     std::process::Command::new("unzip")
-        .current_dir(&tmp_dir)
+        .current_dir(tmp_dir)
         .arg(zip_dir)
         .status()?;
 
