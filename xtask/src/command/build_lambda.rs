@@ -11,7 +11,8 @@ use crate::util::project::project_root;
 
 pub fn build_lambda(args: &BuildLambdaArgs) -> Result<(), DynError> {
     run_cargo_build(&args.target, args.use_cross)?;
-    let lambdas_names = get_project_names(project_root().join("backend").join("lambda"));
+    let lambdas_names =
+        get_project_names(project_root().join("backend").join("api").join("lambda"));
     let target_path = project_root().join("target");
     let release_path = target_path.join(&args.target).join("release");
     let lambdas_dir = target_path.join("lambdas");

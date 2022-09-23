@@ -13,15 +13,15 @@ pub fn zip_file(
     output_file: &PathBuf,
     path_in_zip: &Path,
 ) -> Result<(), DynError> {
-    let file_out = std::fs::File::create(&output_file)?;
-    let mut file_in = std::fs::File::open(&file_path)?;
+    let file_out = std::fs::File::create(output_file)?;
+    let mut file_in = std::fs::File::open(file_path)?;
 
     let mut zip = zip::ZipWriter::new(file_out);
 
     zip.start_file(path_in_zip.to_str().unwrap(), FileOptions::default())?;
     let mut buffer = Vec::new();
     file_in.read_to_end(&mut buffer)?;
-    zip.write_all(&*buffer)?;
+    zip.write_all(&buffer)?;
 
     zip.finish()?;
 
@@ -33,7 +33,7 @@ pub fn _zip_dir(
     output_file: &PathBuf,
     path_prefix: Option<&PathBuf>,
 ) -> Result<(), DynError> {
-    let file = std::fs::File::create(&output_file)?;
+    let file = std::fs::File::create(output_file)?;
 
     let walkdir = WalkDir::new(dir);
     let it = walkdir.into_iter().filter_map(|entry| entry.ok());
@@ -49,11 +49,11 @@ pub fn _zip_dir(
         }
 
         if path.is_file() {
-            let mut file_in = std::fs::File::open(&path)?;
+            let mut file_in = std::fs::File::open(path)?;
             zip.start_file(name.to_str().unwrap(), FileOptions::default())?;
 
             file_in.read_to_end(&mut buffer)?;
-            zip.write_all(&*buffer)?;
+            zip.write_all(&buffer)?;
 
             buffer.clear();
         }
