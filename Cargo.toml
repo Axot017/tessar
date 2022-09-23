@@ -1,2 +1,5 @@
 [workspace]
 members = ["backend/use_case", "backend/api/lambda/*", "xtask"]
+
+[workspace.dependencies]
+nanoid = "0.4"
