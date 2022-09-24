@@ -1,3 +1,5 @@
+use std::path::Path;
+
 use crate::{
     model::error::{DynError, Error},
     util::{project::project_root, tmp_dir::TmpDir, zip::zip_dir},
@@ -47,7 +49,11 @@ pub fn create_dart_project_layer(args: &CreateDartProjectLayerArgs) -> Result<()
 
     let zip_path = layer_path.join("dart_project.zip");
     std::fs::remove_dir_all(&zip_path).ok();
-    zip_dir(tmp_dir.path(), &zip_path, None)?;
+    zip_dir(
+        tmp_dir.path(),
+        &zip_path,
+        Some(&Path::new("lib").to_path_buf()),
+    )?;
 
     Ok(())
 }
