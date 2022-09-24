@@ -27,6 +27,9 @@ pub fn fetch_flutter(args: &FetchFlutterArgs) -> Result<(), DynError> {
         return Err(Box::new(Error::FailedToFetchFlutter));
     }
 
+    std::process::Command::new("ls")
+        .current_dir(&tmp_path)
+        .status()?;
     let flutter_bin_path = flutter_path.join("bin");
     let status = std::process::Command::new("flutter")
         .current_dir(&flutter_bin_path)
