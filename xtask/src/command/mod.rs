@@ -2,7 +2,9 @@ use clap::{Args, Parser, Subcommand};
 
 pub mod build_lambda;
 pub mod create_dart_layer;
+pub mod create_dart_project_layer;
 pub mod create_flutter_layer;
+pub mod fetch_flutter;
 
 #[derive(Parser)]
 #[clap(author, version, about, long_about = None)]
@@ -17,6 +19,8 @@ pub enum Command {
     BuildLambda(BuildLambdaArgs),
     CreateFlutterLayer(CreateFlutterLayerArgs),
     CreateDartLayer(CreateDartLayerArgs),
+    CreateDartProjectArgs(CreateDartProjectLayerArgs),
+    FetchFlutter(FetchFlutterArgs),
 }
 
 #[derive(Args, Debug)]
@@ -35,5 +39,14 @@ pub struct CreateFlutterLayerArgs {}
 #[derive(Args, Debug)]
 pub struct CreateDartLayerArgs {
     #[clap(short, long)]
+    pub version: String,
+}
+
+#[derive(Args, Debug)]
+pub struct CreateDartProjectLayerArgs {}
+
+#[derive(Args, Debug)]
+pub struct FetchFlutterArgs {
+    #[clap(short, long, default_value_t = String::from("stable"))]
     pub version: String,
 }
