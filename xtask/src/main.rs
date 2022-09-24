@@ -24,7 +24,7 @@ fn try_main() -> Result<(), DynError> {
         Command::BuildLambda(args) => build_lambda(args),
         Command::CreateFlutterLayer(args) => create_flutter_layer(args),
         Command::CreateDartLayer(args) => create_dart_layer(args),
-        Command::CreateDartProjectArgs(args) => create_dart_project_layer(args),
+        Command::CreateDartProjectLayer(args) => create_dart_project_layer(args),
         Command::FetchFlutter(args) => fetch_flutter(args),
     }
 }

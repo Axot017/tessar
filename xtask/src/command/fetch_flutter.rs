@@ -7,10 +7,10 @@ use super::FetchFlutterArgs;
 
 pub fn fetch_flutter(args: &FetchFlutterArgs) -> Result<(), DynError> {
     let tmp_path = project_root().join("tmp");
-    std::fs::create_dir_all(&tmp_path)?;
+    std::fs::create_dir_all(&tmp_path).ok();
 
     let flutter_bin_path = tmp_path.join("flutter");
-    std::fs::remove_dir_all(&flutter_bin_path)?;
+    std::fs::remove_dir_all(&flutter_bin_path).ok();
 
     let status = std::process::Command::new("git")
         .current_dir(&tmp_path)
@@ -29,17 +29,7 @@ pub fn fetch_flutter(args: &FetchFlutterArgs) -> Result<(), DynError> {
 
     let status = std::process::Command::new("flutter")
         .current_dir(&flutter_bin_path)
-        .args(vec![
-            "precache",
-            "--no-android",
-            "--no-ios",
-            "--no-linux",
-            "--no-macos",
-            "--no-windows",
-            "--no-universal",
-            "--no-fuchsia",
-            "--web",
-        ])
+        .args(vec!["precache"])
         .status()?;
 
     if status.success() {

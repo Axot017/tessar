@@ -5,6 +5,9 @@ pub enum Error {
     BuildFailed,
     FailedToFetchFlutter,
     FailedToPrecacheFlutter,
+    DartDoesNotExist,
+    FailedToCreateDartProject,
+    FailedToAddDartPackage(String),
 }
 
 impl Display for Error {
