@@ -1,15 +1,9 @@
 use std::path::Path;
 
 use lambda_http::{run, service_fn, Body, Error, Request, Response};
-use tracing::log::error;
 
 async fn function_handler(_event: Request) -> Result<Response<Body>, Error> {
-    let opt_path = Path::new("/").join("opt");
-    error!("opt: {}", opt_path.is_dir());
-    let lib_path = opt_path.join("lib");
-    error!("lib: {}", lib_path.is_dir());
-    let project_path = lib_path.join("dart_project");
-    error!("project: {}", project_path.is_dir());
+    let project_path = Path::new("/").join("opt").join("lib").join("dart_project");
 
     let result = std::process::Command::new("dart")
         .arg("analyze")
