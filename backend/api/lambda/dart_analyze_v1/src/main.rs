@@ -11,7 +11,7 @@ async fn function_handler(_event: Request) -> Result<Response<Body>, Error> {
         .output()
         .unwrap();
 
-    let result = String::from_utf8(result.stdout).unwrap_or_else(|e| e.to_string());
+    let result = String::from_utf8(result.stderr).unwrap_or_else(|e| e.to_string());
 
     let resp = Response::builder()
         .status(200)
