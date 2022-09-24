@@ -28,9 +28,12 @@ pub fn fetch_flutter(args: &FetchFlutterArgs) -> Result<(), DynError> {
     }
 
     std::process::Command::new("ls")
-        .current_dir(&tmp_path)
+        .current_dir(&flutter_path)
         .status()?;
     let flutter_bin_path = flutter_path.join("bin");
+    std::process::Command::new("ls")
+        .current_dir(&flutter_bin_path)
+        .status()?;
     let status = std::process::Command::new("flutter")
         .current_dir(&flutter_bin_path)
         .args(vec!["precache"])
