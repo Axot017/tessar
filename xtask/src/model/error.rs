@@ -3,6 +3,8 @@ use std::fmt::Display;
 #[derive(Debug)]
 pub enum Error {
     BuildFailed,
+    FailedToFetchFlutter,
+    FailedToPrecacheFlutter,
 }
 
 impl Display for Error {
