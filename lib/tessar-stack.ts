@@ -13,6 +13,26 @@ export class TessarStack extends cdk.Stack {
       compatibleRuntimes: [Runtime.PROVIDED_AL2],
     })
 
+    const dartProjectLayer = new LayerVersion(this, 'DartProjectLayer', {
+      code: Code.fromAsset('target/layer/dart_project.zip'),
+      compatibleRuntimes: [Runtime.PROVIDED_AL2],
+    })
+
+    const dartAnalyzeV1 = new Function(this, 'DartAnalyzeV1', {
+      description: 'Analyze dart code',
+      code: Code.fromAsset(
+        'target/lambdas/dart_analyze_v1.zip'
+      ),
+      runtime: Runtime.PROVIDED_AL2,
+      handler: 'not.required',
+      architecture: Architecture.ARM_64,
+      environment: {
+        RUST_BACKTRACE: '1',
+      },
+      logRetention: RetentionDays.ONE_WEEK,
+      layers: [dartLayer, dartProjectLayer],
+    });
+
     const dartVersionV1 = new Function(this, 'DartVersionV1', {
       description: 'Check dart version',
       code: Code.fromAsset(
@@ -39,6 +59,7 @@ export class TessarStack extends cdk.Stack {
 
     const dart = v1.addResource('dart');
     dart.addResource('version').addMethod("GET", new LambdaIntegration(dartVersionV1, { proxy: true }));
+    dart.addResource('analyze').addMethod("GET", new LambdaIntegration(dartAnalyzeV1, { proxy: true }))
   }
 
 }
