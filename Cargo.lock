@@ -203,6 +203,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "dart_analyze_v1"
+version = "0.1.0"
+dependencies = [
+ "lambda_http",
+ "lambda_runtime",
+ "tokio",
+ "tracing",
+ "tracing-subscriber",
+]
+
+[[package]]
 name = "dart_version_v1"
 version = "0.1.0"
 dependencies = [
