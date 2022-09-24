@@ -19,7 +19,7 @@ pub enum Command {
     BuildLambda(BuildLambdaArgs),
     CreateFlutterLayer(CreateFlutterLayerArgs),
     CreateDartLayer(CreateDartLayerArgs),
-    CreateDartProjectArgs(CreateDartProjectLayerArgs),
+    CreateDartProjectLayer(CreateDartProjectLayerArgs),
     FetchFlutter(FetchFlutterArgs),
 }
 
@@ -43,7 +43,10 @@ pub struct CreateDartLayerArgs {
 }
 
 #[derive(Args, Debug)]
-pub struct CreateDartProjectLayerArgs {}
+pub struct CreateDartProjectLayerArgs {
+    #[clap(short, long)]
+    pub packages: Vec<String>,
+}
 
 #[derive(Args, Debug)]
 pub struct FetchFlutterArgs {

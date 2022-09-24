@@ -28,7 +28,7 @@ pub fn zip_file(
     Ok(())
 }
 
-pub fn _zip_dir(
+pub fn zip_dir(
     dir: &PathBuf,
     output_file: &PathBuf,
     path_prefix: Option<&PathBuf>,
