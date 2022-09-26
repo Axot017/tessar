@@ -2,9 +2,9 @@
 members = [
   "backend/use_case/*",
   "backend/api/container/*",
-  "backend/api/common",
+  "backend/api/common_api",
   "backend/api/lambda/*",
-  "backend/feature/common/domain/*",
+  "backend/feature/common/*",
   "xtask",
 ]
 
