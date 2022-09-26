@@ -171,8 +171,13 @@ dependencies = [
 name = "common"
 version = "0.1.0"
 dependencies = [
+ "common_domain",
  "serde",
 ]
+
+[[package]]
+name = "common_domain"
+version = "0.1.0"
 
 [[package]]
 name = "core-foundation"
@@ -234,10 +239,6 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
 ]
-
-[[package]]
-name = "domain_common"
-version = "0.1.0"
 
 [[package]]
 name = "encoding_rs"
