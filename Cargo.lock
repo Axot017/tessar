@@ -170,6 +170,9 @@ dependencies = [
 [[package]]
 name = "common"
 version = "0.1.0"
+dependencies = [
+ "serde",
+]
 
 [[package]]
 name = "core-foundation"
@@ -233,7 +236,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "define_port"
+name = "domain_common"
 version = "0.1.0"
 
 [[package]]
