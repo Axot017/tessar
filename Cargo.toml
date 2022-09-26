@@ -1,19 +1,23 @@
 [workspace]
 members = [
-  "backend/use_case",
+  "backend/use_case/*",
   "backend/api/container/*",
+  "backend/api/common",
   "backend/api/lambda/*",
+  "backend/feature/common/domain/*",
   "xtask",
 ]
 
 [workspace.dependencies]
+actix-web = { version = "4" }
 clap = { version = "3.2.17" }
 lambda_http = { version = "0.6", default-features = false }
 lambda_runtime = { version = "0.6" }
 nanoid = { version = "0.4" }
 openssl = { version = "0.10", features = ["vendored"] }
 reqwest = { version = "0.11.12" }
-serde = { version = "1.0.144" }
+serde = { version = "1.0" }
+serde_json = { version = "1.0" }
 tokio = { version = "1" }
 toml = { version = "0.5.9" }
 tracing = { version = "0.1" }
