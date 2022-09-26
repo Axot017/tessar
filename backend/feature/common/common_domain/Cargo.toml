@@ -8,4 +8,5 @@ edition = "2021"
 [features]
 error = []
 define_port = []
-default = ["error", "define_port"]
+boxed = []
+default = ["error", "boxed"]

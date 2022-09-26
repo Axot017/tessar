@@ -1,6 +1,7 @@
+use crate::boxed::Boxed;
 use std::collections::HashMap;
 
-// type Result<T> = std::result::Result<T, Error>;
+pub type Result<T> = std::result::Result<T, Error>;
 
 #[derive(Clone, PartialEq, Eq, Debug)]
 pub enum ErrorType {
@@ -12,7 +13,7 @@ pub enum ErrorType {
 pub struct Error {
     pub debug_message: String,
     pub error_type: ErrorType,
-    pub details: ErrorDetails,
+    pub details: Box<ErrorDetails>,
 }
 
 #[derive(Clone, PartialEq, Eq, Debug)]
@@ -26,7 +27,7 @@ pub struct ErrorDetails {
 pub struct ErrorBuilder {
     debug_message: Option<String>,
     error_type: Option<ErrorType>,
-    details: Option<ErrorDetails>,
+    details: Option<Box<ErrorDetails>>,
 }
 
 impl Default for Error {
@@ -36,6 +37,12 @@ impl Default for Error {
 }
 
 impl Error {
+    pub fn unknown(message: &str) -> Error {
+        Error::builder()
+            .set_debug_message(message.to_owned())
+            .build()
+    }
+
     pub fn builder() -> ErrorBuilder {
         ErrorBuilder::new()
     }
@@ -61,17 +68,20 @@ impl ErrorBuilder {
     }
 
     pub fn set_details(mut self, details: ErrorDetails) -> Self {
-        self.details = Some(details);
+        self.details = Some(details.boxed());
         self
     }
 
     pub fn build(self) -> Error {
         let debug_message = self.debug_message.unwrap_or_else(|| "".to_owned());
         let error_type = self.error_type.unwrap_or(ErrorType::Unknown);
-        let details = self.details.unwrap_or_else(|| ErrorDetails {
-            message: "Unknown server error".to_owned(),
-            code: "error.unknown".to_owned(),
-            args: None,
+        let details = self.details.unwrap_or_else(|| {
+            ErrorDetails {
+                message: "Unknown server error".to_owned(),
+                code: "error.unknown".to_owned(),
+                args: None,
+            }
+            .boxed()
         });
 
         Error {
@@ -100,6 +110,26 @@ pub mod test {
                     code: "error.unknown".to_owned(),
                     args: None,
                 }
+                .boxed()
+            }
+        )
+    }
+
+    #[test]
+    fn unknown() {
+        let value = Error::unknown("Custom message");
+
+        assert_eq!(
+            value,
+            Error {
+                debug_message: "Custom message".to_owned(),
+                error_type: ErrorType::Unknown,
+                details: ErrorDetails {
+                    message: "Unknown server error".to_owned(),
+                    code: "error.unknown".to_owned(),
+                    args: None,
+                }
+                .boxed()
             }
         )
     }
@@ -124,7 +154,7 @@ pub mod test {
             Error {
                 debug_message,
                 error_type,
-                details,
+                details: details.boxed(),
             }
         )
     }
