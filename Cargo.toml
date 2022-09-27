@@ -1,6 +1,5 @@
 [workspace]
 members = [
-  "backend/use_case/*",
   "backend/api/container/*",
   "backend/api/common_api",
   "backend/api/lambda/*",
