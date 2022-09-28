@@ -51,7 +51,7 @@ export class TessarStack extends cdk.Stack {
     const api = new RestApi(this, "TessarRestApi", {
       restApiName: "Tessar Api",
       deployOptions: {
-        stageName: 'dev',
+        stageName: 'api',
       }
     });
 

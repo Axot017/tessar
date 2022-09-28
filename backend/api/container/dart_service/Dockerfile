@@ -1,4 +1,4 @@
-FROM rust:latest as builder
+FROM rust:1.64 as builder
 
 WORKDIR /app
 COPY . .
@@ -9,4 +9,4 @@ FROM dart:latest
 
 WORKDIR /app
 COPY --from=builder /app/target/release/dart_service .
-CMD [ "dart_service" ]
+CMD [ "./dart_service" ]
