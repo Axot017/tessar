@@ -1,5 +1,4 @@
 mod controller;
-mod dto;
 
 use actix_web::{web, App, HttpServer};
 

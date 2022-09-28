@@ -1,5 +1,5 @@
 [package]
-name = "common"
+name = "common_api"
 version = "0.1.0"
 edition = "2021"
 
@@ -8,3 +8,7 @@ common_domain = { path = "../../feature/common/common_domain", features = [
   "error",
 ] }
 serde = { workspace = true, features = ["derive"] }
+
+[features]
+code = []
+default = []

@@ -1,6 +1,6 @@
 use actix_web::{get, post, web::Json, HttpResponse, Responder};
 
-use crate::dto::{
+use common_api::dto::code::{
     analyze_result_dto::{AnalyzeResultDto, Lint},
     file_dto::FileDto,
     version_dto::VersionDto,
