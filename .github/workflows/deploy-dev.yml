@@ -1,9 +1,11 @@
 name: 'Build and deploy - dev'
 
+
 on:
-  push:
-    branches: 
-      - master
+  workflow_dispatch:
+  # push:
+  #   branches: 
+  #     - master
 
 env:
   CARGO_TERM_COLOR: always
