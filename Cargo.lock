@@ -430,7 +430,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "common"
+name = "common_api"
 version = "0.1.0"
 dependencies = [
  "common_domain",
@@ -536,7 +536,7 @@ name = "dart_service"
 version = "0.1.0"
 dependencies = [
  "actix-web",
- "serde",
+ "common_api",
 ]
 
 [[package]]

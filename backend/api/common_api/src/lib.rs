@@ -1,1 +1,1 @@
-pub mod error_dto;
+pub mod dto;
