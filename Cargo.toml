@@ -4,6 +4,7 @@ members = [
   "backend/api/common_api",
   "backend/api/lambda/*",
   "backend/feature/common/*",
+  "backend/feature/code/*",
   "xtask",
 ]
 
