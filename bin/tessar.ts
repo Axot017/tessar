@@ -3,4 +3,4 @@ import * as cdk from 'aws-cdk-lib';
 import { TessarStack } from '../lib/tessar-stack';
 
 const app = new cdk.App();
-new TessarStack(app, 'TessarStack', {});
+new TessarStack(app, 'TessarStackDev', {});
