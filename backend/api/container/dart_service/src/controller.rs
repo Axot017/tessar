@@ -1,7 +1,7 @@
 use actix_web::{get, post, web::Json, HttpResponse, Responder};
 
 use common_api::dto::code::{
-    analyze_result_dto::{AnalyzeResultDto, Lint},
+    analyze_result_dto::{AnalyzeResultDto, LintDto, LintLevelDto},
     file_dto::FileDto,
     version_dto::VersionDto,
 };
@@ -24,8 +24,8 @@ async fn format(files: Json<Vec<FileDto>>) -> impl Responder {
 async fn analyze(_files: Json<Vec<FileDto>>) -> impl Responder {
     let dto = AnalyzeResultDto {
         success: true,
-        lints: vec![Lint {
-            level: "info".to_owned(),
+        lints: vec![LintDto {
+            level: LintLevelDto::INFO,
             message: "test message".to_owned(),
             file: "some/file.dart".to_owned(),
             column: 1,

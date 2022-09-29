@@ -430,9 +430,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "code_domain"
+version = "0.1.0"
+
+[[package]]
+name = "code_infra"
+version = "0.1.0"
+
+[[package]]
 name = "common_api"
 version = "0.1.0"
 dependencies = [
+ "code_domain",
  "common_domain",
  "serde",
 ]
