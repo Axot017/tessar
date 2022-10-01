@@ -9,8 +9,7 @@ async fn main() -> std::io::Result<()> {
             web::scope("/api").service(
                 web::scope("/v1").service(
                     web::scope("dart")
-                        .service(controller::version)
-                        .service(controller::analyze)
+                        .service(controller::analyze_raw)
                         .service(controller::format),
                 ),
             ),
