@@ -1909,6 +1909,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "use_case"
+version = "0.1.0"
+dependencies = [
+ "code_domain",
+ "common_domain",
+]
+
+[[package]]
 name = "vcpkg"
 version = "0.2.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
