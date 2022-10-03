@@ -1,4 +1,7 @@
-use common_domain::error::{Error, Result};
+use common_domain::{
+    error::{Error, Result},
+    tmp::TmpDirProvider,
+};
 use nanoid::nanoid;
 use std::path::PathBuf;
 
@@ -15,9 +18,11 @@ impl TmpDir {
             .map_err(|e| Error::unknown(&format!("Failed to create tmp dir {dir:?} - {e:?}")))?;
         Ok(TmpDir { path: dir })
     }
+}
 
-    pub fn path(&self) -> &PathBuf {
-        &self.path
+impl TmpDirProvider for TmpDir {
+    fn path(&self) -> PathBuf {
+        self.path.to_owned()
     }
 }
 
